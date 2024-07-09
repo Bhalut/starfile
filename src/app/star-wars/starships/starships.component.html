@@ -1,0 +1,10 @@
+<div class="starships">
+  <h1>Starships</h1>
+  <div *ngFor="let starship of starships" class="starship-card">
+    <h2>{{ starship.name }}</h2>
+    <p>Model: {{ starship.model }}</p>
+    <p>Manufacturer: {{ starship.manufacturer }}</p>
+    <p>Cost: {{ starship.cost_in_credits }} credits</p>
+    <p>Length: {{ starship.length }} meters</p>
+  </div>
+</div>
