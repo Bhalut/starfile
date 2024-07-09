@@ -1,0 +1,15 @@
+<div class="file-upload">
+  <h1>Upload File</h1>
+  <ngx-dropzone (change)="onSelect($event)">
+    <ngx-dropzone-label>Drop your file here</ngx-dropzone-label>
+    <ngx-dropzone-preview
+      *ngFor="let file of files"
+      [removable]="true"
+      (removed)="onRemove(file)"
+    >
+      <ngx-dropzone-label>{{ file.name }} ({{ file.type }})</ngx-dropzone-label>
+    </ngx-dropzone-preview>
+  </ngx-dropzone>
+  <input type="file" (change)="fileBrowseHandler($event)" />
+  <p *ngIf="hash">Checksum (SHA-256): {{ hash }}</p>
+</div>
