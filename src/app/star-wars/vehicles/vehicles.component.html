@@ -2,9 +2,9 @@
   <h1>Vehicles</h1>
   <div *ngFor="let vehicle of vehicles" class="vehicle-card">
     <h2>{{ vehicle.name }}</h2>
-    <p>Model: {{ vehicle.model }}</p>
-    <p>Manufacturer: {{ vehicle.manufacturer }}</p>
-    <p>Cost: {{ vehicle.cost_in_credits }} credits</p>
-    <p>Length: {{ vehicle.length }} meters</p>
+    <p><strong>Model:</strong> {{ vehicle.model }}</p>
+    <p><strong>Manufacturer:</strong> {{ vehicle.manufacturer }}</p>
+    <p><strong>Cost:</strong> {{ vehicle.cost_in_credits }} credits</p>
+    <p><strong>Length:</strong> {{ vehicle.length }} meters</p>
   </div>
 </div>
