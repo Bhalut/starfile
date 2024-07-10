@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { FormsModule } from '@angular/forms';
 
 import * as CryptoJS from 'crypto-js';
 
@@ -13,13 +14,21 @@ describe('FileUploadComponent', () => {
   let mockBlockchainService: any;
 
   beforeEach(async () => {
-    mockBlockchainService = jasmine.createSpyObj(['registerFile']);
+    mockBlockchainService = jasmine.createSpyObj([
+      'login',
+      'registerFile',
+      'getAsset',
+    ]);
+    mockBlockchainService.login.and.returnValue(Promise.resolve('mockToken'));
     mockBlockchainService.registerFile.and.returnValue(
       Promise.resolve({ success: true })
     );
+    mockBlockchainService.getAsset.and.returnValue(
+      Promise.resolve('mockAssetDetails')
+    );
 
     await TestBed.configureTestingModule({
-      imports: [FileUploadComponent, NgxDropzoneModule],
+      imports: [FileUploadComponent, NgxDropzoneModule, FormsModule],
       providers: [
         { provide: BlockchainService, useValue: mockBlockchainService },
       ],
@@ -99,7 +108,40 @@ describe('FileUploadComponent', () => {
     ).toString();
 
     expect(component.hash).toBe(expectedHash);
+  });
 
-    expect(mockBlockchainService.registerFile).toHaveBeenCalled();
+  it('should login and upload file', async () => {
+    component.email = 'test@example.com';
+    component.password = 'testpassword';
+    component.files = [
+      new File(['test'], 'test.pdf', { type: 'application/pdf' }),
+    ];
+    component.hash = 'mockHash';
+
+    await component.login();
+    await component.uploadFile();
+
+    expect(mockBlockchainService.login).toHaveBeenCalledWith(
+      'test@example.com',
+      'testpassword'
+    );
+    expect(mockBlockchainService.registerFile).toHaveBeenCalledWith(
+      'test.pdf',
+      'mockHash',
+      'mockToken'
+    );
+  });
+
+  it('should get asset details', async () => {
+    component.assetId = 'mockAssetId';
+    component.token = 'mockToken';
+
+    await component.getAsset();
+
+    expect(mockBlockchainService.getAsset).toHaveBeenCalledWith(
+      'mockAssetId',
+      'mockToken'
+    );
+    expect(component.assetDetails).toBe('mockAssetDetails');
   });
 });
