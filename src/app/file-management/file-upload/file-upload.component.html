@@ -1,5 +1,19 @@
 <div class="file-upload">
-  <h1>Upload File</h1>
+  <h1>Upload File to Blockchain</h1>
+
+  <div class="login-form">
+    <input type="email" [(ngModel)]="email" placeholder="Email" />
+    <input type="password" [(ngModel)]="password" placeholder="Password" />
+    <button (click)="login()" class="login-button">Login</button>
+    <p
+      *ngIf="loginMessage"
+      [class.success]="loginMessage.success"
+      [class.error]="!loginMessage.success"
+    >
+      {{ loginMessage.message }}
+    </p>
+  </div>
+
   <ngx-dropzone (change)="onSelect($event)">
     <ngx-dropzone-label>Drop your file here</ngx-dropzone-label>
     <ngx-dropzone-preview
@@ -10,6 +24,34 @@
       <ngx-dropzone-label>{{ file.name }} ({{ file.type }})</ngx-dropzone-label>
     </ngx-dropzone-preview>
   </ngx-dropzone>
-  <input type="file" (change)="fileBrowseHandler($event)" />
-  <p *ngIf="hash">Checksum (SHA-256): {{ hash }}</p>
+
+  <button (click)="uploadFile()" class="upload-button">
+    Upload File to Blockchain
+  </button>
+  <p
+    *ngIf="uploadMessage"
+    [class.success]="uploadMessage.success"
+    [class.error]="!uploadMessage.success"
+  >
+    {{ uploadMessage.message }}
+  </p>
+
+  <div class="get-asset">
+    <input type="text" [(ngModel)]="assetId" placeholder="Asset ID" />
+    <button (click)="getAsset()" class="get-asset-button">
+      Get Asset Details
+    </button>
+    <p *ngIf="assetDetails" class="asset-details">
+      Asset Details: {{ assetDetails }}
+    </p>
+    <p
+      *ngIf="getAssetMessage"
+      [class.success]="getAssetMessage.success"
+      [class.error]="!getAssetMessage.success"
+    >
+      {{ getAssetMessage.message }}
+    </p>
+  </div>
+
+  <p *ngIf="hash" class="checksum">Checksum (SHA-256): {{ hash }}</p>
 </div>

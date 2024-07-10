@@ -1,7 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap')
+
 .file-upload
   display: flex
   flex-direction: column
   align-items: center
+  background-image: url('https://th.bing.com/th/id/R.a481864aadd784dd456cb73d9d124d37?rik=Gk0NOo8iET2btw&pid=ImgRaw&r=0')
+  background-size: cover
+  background-position: center
+  min-height: 100vh
+  padding: 2rem
+  color: white
+  font-family: 'Orbitron', sans-serif
+
+  h1
+    font-size: 3rem
+    margin-bottom: 2rem
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7)
+
+  .login-form
+    display: flex
+    flex-direction: column
+    align-items: center
+    margin-bottom: 2rem
+
+    input
+      width: 300px
+      padding: 0.5rem
+      margin-bottom: 1rem
+      border: none
+      border-radius: 5px
+      background-color: rgba(255, 255, 255, 0.2)
+      color: white
+      font-size: 1rem
+
+    .login-button
+      width: 300px
+      padding: 0.5rem
+      border: none
+      border-radius: 5px
+      background-color: #ffcc00
+      color: black
+      font-size: 1rem
+      cursor: pointer
+      transition: background-color 0.3s
+
+      &:hover
+        background-color: #ffd633
 
 ngx-dropzone
   width: 80%
@@ -13,6 +57,100 @@ ngx-dropzone
   align-items: center
   margin: 20px 0
   cursor: pointer
+  background: rgba(0, 0, 0, 0.5)
+  transition: border 0.3s
 
-input[type="file"]
-  display: none
+  &:hover
+    border: 2px dashed #ffcc00
+
+ngx-dropzone-label
+    color: white
+    font-size: 1.2rem
+    text-align: center
+
+ngx-dropzone-preview
+    display: flex
+    flex-direction: column
+    align-items: center
+    margin: 10px
+    padding: 10px
+    background: rgba(0, 0, 0, 0.5)
+    border-radius: 5px
+    width: 80%
+    max-width: 400px
+
+.upload-button
+  width: 300px
+  padding: 0.5rem
+  border: none
+  border-radius: 5px
+  background-color: #ffcc00
+  color: black
+  font-size: 1rem
+  cursor: pointer
+  transition: background-color 0.3s
+  margin-bottom: 2rem
+
+  &:hover
+    background-color: #ffd633
+
+.get-asset
+  display: flex
+  flex-direction: column
+  align-items: center
+  margin-bottom: 2rem
+
+  input
+    width: 300px
+    padding: 0.5rem
+    margin-bottom: 1rem
+    border: none
+    border-radius: 5px
+    background-color: rgba(255, 255, 255, 0.2)
+    color: white
+    font-size: 1rem
+
+  .get-asset-button
+    width: 300px
+    padding: 0.5rem
+    border: none
+    border-radius: 5px
+    background-color: #ffcc00
+    color: black
+    font-size: 1rem
+    cursor: pointer
+    transition: background-color 0.3s
+
+    &:hover
+      background-color: #ffd633
+
+  .asset-details
+    font-size: 1.2rem
+    margin-top: 1rem
+
+.checksum
+  font-size: 1.2rem
+  margin-top: 1rem
+  text-align: center
+
+.success
+  color: green
+
+.error
+  color: red
+
+@media (max-width: 768px)
+  .file-upload
+    padding: 1rem
+
+  ngx-dropzone
+    width: 100%
+
+  ngx-dropzone-preview
+    width: 100%
+
+  .login-form,
+  .upload-button,
+  .get-asset input,
+  .get-asset-button
+    width: 100%
