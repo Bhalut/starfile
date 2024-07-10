@@ -5,14 +5,53 @@ import axios from 'axios';
   providedIn: 'root',
 })
 export class BlockchainService {
-  private edaURL = 'https://eda.api.endpoint';
+  private edaURL = 'http://sandbox-eda.lineadecodigo.net/v1';
 
-  async registerFile(filename: string, hash: string) {
-    const response = await axios.post(`${this.edaURL}/register`, {
-      filename,
-      hash,
+  async login(email: string, password: string): Promise<string> {
+    const response = await axios.post(`${this.edaURL}/auth/login`, {
+      email,
+      password,
     });
+    return response.data.data;
+  }
 
-    return response.data;
+  async registerFile(
+    filename: string,
+    hash: string,
+    token: string
+  ): Promise<any> {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    };
+
+    const response = await axios.post(
+      `${this.edaURL}/transaction/resources/assets`,
+      {
+        name: filename,
+        hash,
+      },
+      {
+        headers,
+      }
+    );
+
+    return response.data.data;
+  }
+
+  async getAsset(assetId: string, token: string): Promise<any> {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    };
+
+    const response = await axios.get(
+      `${this.edaURL}/transaction/resources/assets/${assetId}`,
+      {
+        headers,
+      }
+    );
+
+    return response.data.data;
   }
 }
